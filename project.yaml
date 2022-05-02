@@ -3,10 +3,15 @@ metadata:
   name: nyc-taxi-gilad
 spec:
   functions:
-  - url: db://nyc-taxi-gilad/taxi
+  - url: taki.py
     name: taxi
-  - url: db://nyc-taxi-gilad/model-serving
+    requirements: ['lightgbm','shapely']
+    image: mlrun/mlrun
+  - url: serving.py
     name: model-serving
+    kind: serving
+    image: mlrun/mlrun
+    requirements: ['lightgbm']
   workflows:
   - name: main
     code: "from kfp import dsl\nfrom mlrun.platforms import auto_mount\nimport os\n\
@@ -32,7 +37,10 @@ spec:
       \ funcs[\"model-serving\"].deploy_step(models={\"taxi-serving_v1\": train.outputs['FareModel']},\
       \ tag='v2')\n"
     engine: null
-  artifacts: []
+  artifacts:
+  - kind: 'dataset'
+    target_path: v3io:///projects/nyc-taxi-gilad/artifacts/data/nyc-taxi-dataset.csv
+    key: nyc-taxi-dataset
   source: ''
   subpath: ''
   origin_url: ''
