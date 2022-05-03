@@ -3,15 +3,20 @@ metadata:
   name: nyc-taxi-gilad
 spec:
   functions:
-  - url: taki.py
+  - url: taxi.py
+    kind: job
     name: taxi
     requirements: ['lightgbm','shapely']
     image: mlrun/mlrun
-  - url: serving.py
+  - url: model-serving.py
     name: model-serving
     kind: serving
     image: mlrun/mlrun
     requirements: ['lightgbm']
+    default_class: LGBMModel
+    model:
+        name: taxi-serving1
+        uri: store://artifacts/nyc-taxi-gilad/train_model_FareModel:962f4de29b9146519277514bd3a7e552
   workflows:
   - name: main
     code: "from kfp import dsl\nfrom mlrun.platforms import auto_mount\nimport os\n\
@@ -39,8 +44,13 @@ spec:
     engine: null
   artifacts:
   - kind: 'dataset'
-    target_path: v3io:///projects/nyc-taxi-gilad/artifacts/data/nyc-taxi-dataset.csv
+    local_path: './project/nyc-taxi-dataset.csv'
+    format: 'csv'
     key: nyc-taxi-dataset
+  - kind: 'model'
+    local_path: '/User/v3io/projects/nyc-taxi-gilad/artifacts/models/FareModel.pkl'
+    key: train_FareModel
+    model_file: 'FareModel.pkl'
   source: ''
   subpath: ''
   origin_url: ''
