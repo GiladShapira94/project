@@ -111,6 +111,11 @@ def deploy_all(project):
             project.set_function(f'db://{project.name}/{name}')
             print("******************************************************************************************************")
 ````
+#### Save project YAML
+Before you try to run project workflow its important to save changes in the project YAML
+````
+project.save()
+````
 #### Run project workflow 
 ````
 project.run(watch=True)
