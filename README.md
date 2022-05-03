@@ -79,6 +79,7 @@ def upload_artifacts(project):
             print(f"{key} Sucssefly Uploaded")
             print(f"{key} {kind} Sucssefly Uploaded")
 ````
+#### IMPORTANT - if you need to enter atrifacts path for deploying function  - edit the project YAML and then load the project again
 #### Deploy functions 
 This function get project name as an input, go over project YAML file and deploy the functions by thier atributes that you define in the YAML file
 ````
