@@ -2,7 +2,7 @@
 
 from os import path
 import numpy as np 
-import pandas as pd
+import pandas
 import datetime as dt
 from sklearn.model_selection import train_test_split
 import lightgbm as lgbm
