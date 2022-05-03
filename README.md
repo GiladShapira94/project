@@ -84,12 +84,15 @@ This function get project name as an input, go over project YAML file and deploy
 ````
 import mlrun
 
+import mlrun
+
 def deploy_all(project):
 
     project = mlrun.load_project(name=project,context=context)
     for i in range(len(project.spec.functions)):
         func_dict = project.spec.functions[i]
         func = project.get_function(func_dict['name'])
+        name = func_dict['name']
         if 'kind' not in project.spec.functions[i].keys():
             raise KeyError(f"Please spicify kind value on your YAML file , For example: job, serving, remote")
         kind = func_dict['kind']
@@ -98,10 +101,15 @@ def deploy_all(project):
                 func.spec.default_class=project.spec.functions[i]['default_class']
             if 'model' in project.spec.functions[i].keys():
                 func.add_model(project.spec.functions[i]['model']['name'],project.spec.functions[i]['model']['uri'])
+            func.apply(mlrun.auto_mount())
             func.deploy()
+            project.set_function(f'db://{project.name}/{name}')
             print("******************************************************************************************************")
         elif kind not in ['remote','serving']:
+            func.apply(mlrun.auto_mount())
             func.deploy() 
+            project.set_function(f'db://{project.name}/{name}')
+            print("******************************************************************************************************")
 ````
 #### Run project workflow 
 ````
