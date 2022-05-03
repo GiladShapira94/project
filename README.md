@@ -5,7 +5,7 @@
   * Each ML functions needs to have a python file
   * Each artifacts needs to have local file  - same as models files
   * Must have project.yaml  - you can produce source project YAML by excute save function on the source cluter
-  * You can find an example how to push from jupyter on this [link](https://github.com/GiladShapira94/project/blob/master/gitReadme.md)
+  * You can find an example how to push from jupyter on this [link](https://github.com/GiladShapira94/project/blob/master/GitHub-Readme.md)
 * Edit YAML file for the intallation - see example in this repository
 
 # Edit YAML file
