@@ -6,7 +6,12 @@ how you can do it from jupyter or any python notebook .
 ````
 pip install Gitpython
 ````
+#### Clone From GitHub
+* Before you try to push ,clone your repository  - do not pass this step 
 
+````
+git.Repo.clone_from('<GitHub url>', '<name directory>')
+````
 #### Initialize a repository
 1. For initialize new repository, use:
 ````
