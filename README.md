@@ -32,11 +32,7 @@ The project YAML need to be edit before you load the project to the target clust
 ````
 project = mlrun.load_project(url='git://github.com/GiladShapira94/project.git',name='project-git',context='./project')
 ````
-2. Sync project functions - important becuase when you load the project you would not see project function until you excuete this command
-* After you would excuete it you would see your function but you need to deploy them before using them.
-````
-project.sync_functions(save=True)
-````
+
 #### Upload artifacts 
 This function get project name as an input, go over project YAML file and upload the artifacts by thier atributes that you define in the YAML file
 ````
@@ -79,7 +75,13 @@ def upload_artifacts(project):
             print(f"{key} Sucssefly Uploaded")
             print(f"{key} {kind} Sucssefly Uploaded")
 ````
-#### IMPORTANT - if you need to enter atrifacts path for deploying function  - edit the project YAML and then load the project again
+#### IMPORTANT 
+if you need to enter atrifacts path for deploying function  - edit the project YAML and then load the project again
+#### Save to DB - 
+After you upload the artifacts you need to the project to the iguazio DB
+````
+project.save_to_db()
+````
 #### Deploy functions 
 This function get project name as an input, go over project YAML file and deploy the functions by thier atributes that you define in the YAML file
 ````
@@ -112,6 +114,11 @@ def deploy_all(project):
             project.set_function(f'db://{project.name}/{name}')
             print("******************************************************************************************************")
 ````
+#### Set function in project YAML 
+Excute this line for all ML functions 
+````
+project.set_function(f'db://<project name>/<function name>')
+````
 #### Save project YAML
 Before you try to run project workflow its important to save changes in the project YAML
 ````
@@ -119,6 +126,6 @@ project.save()
 ````
 #### Run project workflow 
 ````
-project.run(watch=True)
+project.run(<workflow name>,watch=True)
 ````
 
