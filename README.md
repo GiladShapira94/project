@@ -46,7 +46,6 @@ from pickle import dumps
 
 
 def upload_artifacts(project):
-    project = mlrun.load_project(name=project,context=context)
 
     for i in range(len(project.spec.artifacts)):
         art_dict = project.spec.artifacts[i]
@@ -95,7 +94,6 @@ import mlrun
 
 def deploy_all(project):
 
-    project = mlrun.load_project(name=project,context=context)
     for i in range(len(project.spec.functions)):
         func_dict = project.spec.functions[i]
         func = project.get_function(func_dict['name'])
