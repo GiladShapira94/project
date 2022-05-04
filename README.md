@@ -32,6 +32,10 @@ The project YAML need to be edit before you load the project to the target clust
 ````
 project = mlrun.load_project(url='git://github.com/GiladShapira94/project.git',name='project-git',context='./project')
 ````
+2. Sync function - Must
+````
+project.sync_functions(save=True)
+````
 
 #### Upload artifacts 
 This function get project name as an input, go over project YAML file and upload the artifacts by thier atributes that you define in the YAML file
