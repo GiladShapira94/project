@@ -44,7 +44,7 @@ spec:
     engine: null
   artifacts:
   - kind: 'dataset'
-    local_path: './project/nyc-taxi-dataset.csv'
+    local_path: './project/stocks.csv'
     format: 'csv'
     key: nyc-taxi-dataset
   - kind: 'model'
